@@ -13,4 +13,14 @@
         <input type="submit" value="Search">
     </form>
 </div>
+<div class="cocktail">
+    {% for cocktails in results %}
+        {% for cocktail in cocktails %}
+            <a href="/cocktail/{{ cocktail['idDrink'] }}">
+                <img src="{{ cocktail['strDrinkThumb'] }}">
+                {{ cocktail['strDrink'] }}
+            </a>
+        {% endfor %}
+    {% endfor %}
+</div>
 {% endblock %}

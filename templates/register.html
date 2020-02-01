@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %} Register {% endblock %}
+
+{% block body %}
+
+    <form action="/handle_registration_form" method="POST">
+        First Name: <input type="text" name="fname">
+        Last Name: <input type="text" name="lname">
+        Email: <input type="text" name="email">
+        Username: <input type="text" name="username">
+        Password: <input type="password" name="password">
+        <input type="submit">
+    </form>
+
+{% endblock %}
