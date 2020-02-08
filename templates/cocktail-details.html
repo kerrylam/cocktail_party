@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ name }} {% endblock %}
+
+{% block body %}
+    <div class="container">
+        {{ name }}
+        <img src="{{ url }}">
+        {{ instructions }}
+        {% for ingredient in ingredients %}
+            {{ ingredient['measurement'] }}
+            {{ ingredient['name'] }}
+            <img src="{{ ingredient['img_url'] }}">
+        {% endfor %}
+    </div>
+    <div>
+        
+
+{% endblock %}

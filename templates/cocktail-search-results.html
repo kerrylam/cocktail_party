@@ -5,8 +5,10 @@
 {% block body %}
     <div class="container">
         {% for cocktail in results %}
-            <img src="{{ cocktail['strDrinkThumb'] }}">
+            <a href="/cocktail/{{ cocktail['idDrink'] }}">
+                <img src="{{ cocktail['strDrinkThumb'] }}">
                 {{ cocktail['strDrink'] }}
+            </a>
         {% endfor %}
     </div>
 {% endblock %}

@@ -22,21 +22,30 @@ class User(db.Model):
 
         return f'<First: {self.fname}, Last: {self.lname}>'
 
-class Liquor(db.Model):
+
+class Event_Cocktail(db.Model):
     """Data model for a type of liquor."""
 
-    __tablename__ = "liquors"
+    __tablename__ = "event_cocktails"
 
-    liquor_id = db.Column(db.Integer,
-                          autoincrement=True,
-                          nullable=False,
-                          primary_key=True)
-    name = db.Column(db.String(25), nullable=False)
+    event_cocktail_id = db.Column(db.Integer,
+                                  autoincrement=True,
+                                  nullable=False,
+                                  primary_key=True)
+    event_id = db.Column(db.Integer,
+                         db.ForeignKey('events.event_id'),
+                         nullable=False)
+    cocktail_id = db.Column(db.Integer,
+                            db.ForeignKey('cocktails.cocktail_id'),
+                            nullable = False)
+
+    event = db.relationship("Event")
+    cocktail = db.relationship("Cocktail")
 
     def __repr__(self):
         """Return a human-readable representation of a Liquor."""
 
-        return f'{self.name}'
+        return f'{self.event}'
 
 
 class Cocktail(db.Model):
@@ -49,14 +58,7 @@ class Cocktail(db.Model):
                             nullable=False,
                             primary_key=True)
     name = db.Column(db.String(25), nullable=False)
-    liquor_id = db.Column(db.Integer,
-                          db.ForeignKey('liquors.liquor_id'),
-                          nullable=False)
-    ingredients = db.Column(db.String(50), nullable=False)
-    recipe = db.Column(db.String(100), nullable=False)
-
-    liquor = db.relationship("Liquor")
-
+    image = db.Column(db.String(25), nullable = False)
 
     def __repr__(self):
         """Return a human-readable representation of a Cocktail."""
@@ -73,14 +75,11 @@ class Event(db.Model):
                              autoincrement=True,
                              nullable=False,
                              primary_key=True)
-    cocktail_id = db.Column(db.Integer,
-                            db.ForeignKey('cocktails.cocktail_id'),
-                            nullable=False)
+    name = db.Column(db.String(25), nullable = False)
     user_id = db.Column(db.Integer,
                         db.ForeignKey('users.user_id'),
                         nullable=False)
 
-    cocktail = db.relationship("Cocktail")
     user = db.relationship("User")
 
     def __repr__(self):

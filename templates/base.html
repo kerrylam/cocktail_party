@@ -9,17 +9,22 @@
         {% endfor %}
     {% endif %}
     {% endwith %}
+    {% if session %}
+        <a href="/logout">Logout</a>
+    {% else %}
+        <a href="/login">Login</a>
+        <a href="/register">Register</a>
+    {% endif %}
     <script
         src="https://code.jquery.com/jquery-3.4.1.js"
         integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/static/css/site.css">
-    <a href="/login">Login</a>
-    <a href="/register">Register</a>
 </head>
 <body>
-    <h1>Cocktail Party</h1>
-
+    <a href="/">
+        <h1>Cocktail Party</h1>
+    </a>
     {% block body %}
     {% endblock %}
 
