@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %} My Profile {% endblock %}
+
+{% block body %}
+    Hi {{ user.fname }}, welcome to your profile.
+
+    <form action="/create_new_event" method="POST">
+        Event Name: <input type="text" name="name">
+        <input type="submit">
+    </form>
+
+    {% for event in events %}
+        {{ event.name }}
+    {% endfor %}
+
+
+
+{% endblock %}

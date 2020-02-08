@@ -14,6 +14,14 @@
         {% endfor %}
     </div>
     <div>
-        
+        <form action='/handle_event_form' method="POST">
+            <select name="events">
+            {% for event in events %}
+                <option value={{event.name}}> {{ event.name }} </option>
+            {% endfor %}
+            </select>
+            <input type="submit">
+        </form>
+                    
 
 {% endblock %}

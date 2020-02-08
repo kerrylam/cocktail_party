@@ -132,11 +132,17 @@ def show_cocktail_details(cocktail_id):
                 ingredients.append(ingredient_dict)
             x += 1
 
+    if session['user_id']:
+        user_id = session['user_id']
+        events = Event.query.filter_by(user_id=user_id).all()
+
+
     return render_template('cocktail-details.html',
                            name=name,
                            url=url,
                            instructions=instructions,
-                           ingredients=ingredients)
+                           ingredients=ingredients,
+                           events=events)
 
 
 
@@ -155,7 +161,38 @@ def find_cocktails():
                             results=cocktails)
 
 
-# @app.route('/liquor')
+@app.route('/my_profile')
+def show_user_profile():
+    """Show user's profile page with user's events.
+
+    Each event will show user's saved cocktails."""
+    user_id = session['user_id']
+    user = User.query.filter_by(user_id=user_id).first()
+    events = Event.query.filter_by(user_id=user_id).all()
+
+    return render_template('my-profile.html',
+                            user=user,
+                            events=events)
+
+
+@app.route('/create_new_event', methods=['POST'])
+def create_new_event():
+    """Add user event to user profile and database."""
+
+    user_id = session['user_id']
+    user = User.query.filter_by(user_id=user_id).first()
+    event_name = request.form.get('name')
+    new_event = Event(name=event_name, user_id=user.user_id)
+    db.session.add(new_event)
+    db.session.commit()
+
+    return redirect('/my_profile')
+
+
+# @app.route('/handle_event_form', methods=['POST'])
+# def handle_event_form():
+#     """Add selected cocktail to user's event."""
+
 
 
 if __name__ == '__main__':
