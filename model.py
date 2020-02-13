@@ -36,34 +36,14 @@ class Event_Cocktail(db.Model):
                          db.ForeignKey('events.event_id'),
                          nullable=False)
     cocktail_id = db.Column(db.Integer,
-                            db.ForeignKey('cocktails.cocktail_id'),
                             nullable = False)
 
     event = db.relationship("Event")
-    cocktail = db.relationship("Cocktail")
 
     def __repr__(self):
         """Return a human-readable representation of a Liquor."""
 
         return f'{self.event}'
-
-
-class Cocktail(db.Model):
-    """Data model for a cocktail."""
-
-    __tablename__ = "cocktails"
-
-    cocktail_id = db.Column(db.Integer,
-                            autoincrement=True,
-                            nullable=False,
-                            primary_key=True)
-    name = db.Column(db.String(25), nullable=False)
-    image = db.Column(db.String(25), nullable = False)
-
-    def __repr__(self):
-        """Return a human-readable representation of a Cocktail."""
-
-        return f'{self.name}'
 
 
 class Event(db.Model):

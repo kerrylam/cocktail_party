@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, flash, redirect, session
-from model import connect_to_db, db, User, Event, Cocktail, Event_Cocktail
+from model import connect_to_db, db, User, Event, Event_Cocktail
 import api
 import requests
 
@@ -142,7 +142,8 @@ def show_cocktail_details(cocktail_id):
                            url=url,
                            instructions=instructions,
                            ingredients=ingredients,
-                           events=events)
+                           events=events,
+                           cocktail_id=cocktail_id)
 
 
 
@@ -169,10 +170,12 @@ def show_user_profile():
     user_id = session['user_id']
     user = User.query.filter_by(user_id=user_id).first()
     events = Event.query.filter_by(user_id=user_id).all()
+    event_cocktails = Event_Cocktail.filter_by(event_id=events.event_id).all()
 
     return render_template('my-profile.html',
                             user=user,
-                            events=events)
+                            events=events,
+                            event_cocktails=event_cocktails)
 
 
 @app.route('/create_new_event', methods=['POST'])
@@ -189,10 +192,16 @@ def create_new_event():
     return redirect('/my_profile')
 
 
-# @app.route('/handle_event_form', methods=['POST'])
-# def handle_event_form():
-#     """Add selected cocktail to user's event."""
+@app.route('/handle_event_form', methods=['POST'])
+def handle_event_form():
+    """Add selected cocktail to user's event."""
 
+    event_id = request.form.get('events')
+    cocktail_id = request.form.get('cocktail_id')
+    event_cocktail = Event_Cocktail(event_id=event_id, cocktail_id=cocktail_id)
+    db.session.add(event_cocktail)
+    db.session.commit()
+    return redirect('/my_profile')
 
 
 if __name__ == '__main__':
