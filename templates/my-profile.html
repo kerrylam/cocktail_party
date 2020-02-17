@@ -10,10 +10,46 @@
         <input type="submit">
     </form>
 
-    {% for event in events %}
-        {{ event.name }}
-    {% endfor %}
+    <div>
+        <ul>
+            {% for event in events %}
+                <li>
+                    <button> 
+                        {{ event.name }} 
+                        <input type="hidden" value={{event.event_id}}>
+                    </button>
+                </li>
+                
+            {% endfor %}
+        </ul>
+    </div>
 
+    <div id="event_cocktails">
+        {% for cocktails in results %}
+            {% for cocktail in cocktails %}
+                <a href="/cocktail/{{ cocktail['idDrink'] }}">
+                <img src="{{ cocktail['strDrinkThumb'] }}">
+                {{ cocktail['strDrink'] }}
+                </a>
+            {% endfor %}
+        {% endfor %}
+    </div>
+
+    <script>
+        $("button").click(function() {
+            const inputData = {event_id: $(this).find('input:hidden').val()};
+            $.get('/event_cocktails.json', inputData, (res) => {
+                const cocktail_ids = `${res.cocktails}`
+                for (let cocktail_id of cocktail_ids) {
+                    apiData = {i: cocktail_id}
+                    const url = 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php'
+                    $.get(url, apiData, (res) => {
+                    alert(`${res.drinks}`)
+                    })
+                }
+            });
+        });
+    </script>
 
 
 {% endblock %}

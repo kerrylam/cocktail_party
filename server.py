@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, flash, redirect, session
+from flask import Flask, render_template, request, flash, redirect, session, jsonify
 from model import connect_to_db, db, User, Event, Event_Cocktail
 import api
 import requests
@@ -170,12 +170,37 @@ def show_user_profile():
     user_id = session['user_id']
     user = User.query.filter_by(user_id=user_id).first()
     events = Event.query.filter_by(user_id=user_id).all()
-    event_cocktails = Event_Cocktail.filter_by(event_id=events.event_id).all()
+    favorites = Event.query.filter_by(user_id=user_id, name="Favorites").first()
+    url = 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php'
+    event_cocktails = Event_Cocktail.query.filter_by(event_id=favorites.event_id).all()
+    cocktail_id_list = []
+    for event_cocktail in event_cocktails:
+        cocktail_id_list.append(event_cocktail.cocktail_id)
+        results = []
+        for cocktail_id in cocktail_id_list:
+            response = requests.get(url, params= {'i': cocktail_id})
+            data = response.json()
+            cocktail = data['drinks']
+            results.append(cocktail)
+
 
     return render_template('my-profile.html',
                             user=user,
                             events=events,
-                            event_cocktails=event_cocktails)
+                            results=results)
+
+
+@app.route('/event_cocktails.json')
+def get_event_cocktails_json():
+    """Return JSON response with all event cocktails in DB."""
+
+    event_id = request.args.get("event_id")
+    cocktails = Event_Cocktail.query.filter_by(event_id=event_id).all()
+    cocktail_ids = []
+    for cocktail in cocktails:
+        cocktail_ids.append(cocktail.cocktail_id)
+
+    return jsonify({"cocktails": cocktail_ids})
 
 
 @app.route('/create_new_event', methods=['POST'])
