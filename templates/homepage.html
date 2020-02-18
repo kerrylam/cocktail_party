@@ -13,23 +13,9 @@
         <input type="submit" value="Search">
     </form>
 </div>
-<nav>
-    <ul>
-        <li>
-            <a href="/"> Top Ten Cocktails </a>
-        </li>
-        <li>
-            <a href="/liquor"> Liquor Type </a>
-        </li>
-        <li>
-            <a href="/letter"> Alphabetical </a>
-        </li>
-        <li>
-            <a href="/my_profile"> My Profile </a>
-        </li>
-    </ul>
-</nav>
+
 <div class="cocktail">
+    <h1>Top Ten Cocktails</h1>
     {% for cocktails in results %}
         {% for cocktail in cocktails %}
             <a href="/cocktail/{{ cocktail['idDrink'] }}">
@@ -39,4 +25,5 @@
         {% endfor %}
     {% endfor %}
 </div>
+
 {% endblock %}
