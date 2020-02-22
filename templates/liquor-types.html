@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %} Liquor Types {% endblock %}
+
+{% block body %}
+
+<div class="cocktail">
+    <h1>Popular Liquor Types</h1>
+    {% for cocktails in results %}
+        {% for cocktail in cocktails %}
+            <a href="/ingredient/{{ cocktail['strIngredient'] }}">
+                <img src="https://www.thecocktaildb.com/images/ingredients/{{ cocktail['strIngredient'] }}-small.png">
+                {{ cocktail['strIngredient'] }}
+            </a>
+        {% endfor %}
+    {% endfor %}
+</div>
+{% endblock %}

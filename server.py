@@ -146,6 +146,17 @@ def show_cocktail_details(cocktail_id):
                            cocktail_id=cocktail_id)
 
 
+@app.route('/ingredient/<ingredient_name>')
+def show_cocktails_by_ingredient(ingredient_name):
+    """Show cocktail by ingredient."""
+
+    url = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php'
+    response = requests.get(url, params= {'i': ingredient_name})
+    data = response.json()
+    results = data['drinks']
+
+    return render_template('cocktails-by-ingredient.html',
+                           results=results)
 
 @app.route('/cocktail/search')
 def find_cocktails():
@@ -227,6 +238,24 @@ def handle_event_form():
     db.session.add(event_cocktail)
     db.session.commit()
     return redirect('/my_profile')
+
+@app.route('/popular_liquor_types')
+def display_popular_liquor_types():
+    """Display poplular liquor types used as ingredients."""
+
+    popular_liquor_types = ('vodka', 'gin', 'rum', 'tequila', 'mezcal',\
+                            'bourbon', 'whiskey', 'scotch')
+
+    url = 'https://www.thecocktaildb.com/api/json/v1/1/search.php'
+    results = []
+    for liquor_type in popular_liquor_types:
+        response = requests.get(url, params= {'i': liquor_type})
+        data = response.json()
+        cocktail = data['ingredients']
+        results.append(cocktail)
+
+    return render_template('liquor-types.html',
+                           results=results)
 
 
 if __name__ == '__main__':
