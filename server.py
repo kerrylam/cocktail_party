@@ -258,6 +258,21 @@ def display_popular_liquor_types():
                            results=results)
 
 
+@app.route('/browse/<letter>')
+def browse_by_letter(letter):
+    """Display cocktails of selected letter."""
+
+    url = 'https://www.thecocktaildb.com/api/json/v1/1/search.php'
+    results = []
+    response = requests.get(url, params={'f': letter})
+    data = response.json()
+    cocktail = data['drinks']
+    results.append(cocktail)
+
+    return render_template('browse-by-letter.html',
+                           results=results)
+
+
 if __name__ == '__main__':
     app.debug = True
     connect_to_db(app)

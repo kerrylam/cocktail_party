@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %} Browse {% endblock %}
+
+{% block body %}
+
+    {% for cocktails in results %}
+        {% for cocktail in cocktails %}
+            <a href="/cocktail/{{ cocktail['idDrink'] }}">
+            <img src="{{ cocktail['strDrinkThumb'] }}">
+            {{ cocktail['strDrink'] }}
+            </a>
+        {% endfor %}
+    {% endfor %}
+
+{% endblock %}
