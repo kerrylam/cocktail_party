@@ -25,17 +25,25 @@
     </div>
 
     <div class="event_cocktails">
-        {% for cocktails in results %}
-            {% for cocktail in cocktails %}
-                <a href="/cocktail/{{ cocktail['idDrink'] }}" id="cocktail_link">
-                <img src="{{ cocktail['strDrinkThumb'] }}" id="cocktail_img">
-                {{ cocktail['strDrink'] }}
-                </a>
+        {% if results == [] %}
+            No saved cocktails, please try adding to your favorites.
+        {% else %}
+            {% for cocktails in results %}
+                {% for cocktail in cocktails %}
+                    <a href="/cocktail/{{ cocktail['idDrink'] }}" id="cocktail_link">
+                    <img src="{{ cocktail['strDrinkThumb'] }}" id="cocktail_img">
+                    {{ cocktail['strDrink'] }}
+                    </a>
+                {% endfor %}
             {% endfor %}
-        {% endfor %}
+        {% endif %}
     </div>
 
     <script>
+        $("#delete").click(function() {
+            alert('delete')
+        });
+
         $("button").click(function() {
             const inputData = {event_id: $(this).find('input:hidden').val()};
             const currentImg = $('.event_cocktails');

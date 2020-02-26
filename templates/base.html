@@ -31,9 +31,11 @@
         <li>
             <a href="/popular_liquor_types"> Popular Liquor Types </a>
         </li>
-        <li>
-            <a href="/my_profile"> My Profile </a>
-        </li>
+        {% if session %}
+            <li>
+                <a href="/my_profile"> My Profile </a>
+            </li>
+        {% endif %}
     </ul>
     </nav>
     <div id="alphabet" name="letter">

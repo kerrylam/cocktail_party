@@ -234,9 +234,12 @@ def handle_event_form():
 
     event_id = request.form.get('events')
     cocktail_id = request.form.get('cocktail_id')
-    event_cocktail = Event_Cocktail(event_id=event_id, cocktail_id=cocktail_id)
-    db.session.add(event_cocktail)
-    db.session.commit()
+    if Event_Cocktail.query.filter_by(event_id=event_id, cocktail_id=cocktail_id).first():
+        flash("Cocktail already added.")
+    else:
+        event_cocktail = Event_Cocktail(event_id=event_id, cocktail_id=cocktail_id)
+        db.session.add(event_cocktail)
+        db.session.commit()
     return redirect('/my_profile')
 
 @app.route('/popular_liquor_types')
