@@ -5,7 +5,11 @@
 {% block body %}
     <div class="container">
         {% for cocktail in results %}
-            <a href="/cocktail/{{ cocktail['idDrink'] }}">
+            {% if session %}
+                <a href="/cocktail/{{ cocktail['idDrink'] }}">
+            {% else %}
+                <a href="/login">
+            {% endif %}    
                 <img src="{{ cocktail['strDrinkThumb'] }}">
                 {{ cocktail['strDrink'] }}
             </a>

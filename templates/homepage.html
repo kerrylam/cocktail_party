@@ -18,7 +18,11 @@
     <h1>Top Ten Cocktails</h1>
     {% for cocktails in results %}
         {% for cocktail in cocktails %}
-            <a href="/cocktail/{{ cocktail['idDrink'] }}">
+            {% if session %}
+                <a href="/cocktail/{{ cocktail['idDrink'] }}">
+            {% else %}
+                <a href="/login">
+            {% endif %}
                 <img src="{{ cocktail['strDrinkThumb'] }}">
                 {{ cocktail['strDrink'] }}
             </a>

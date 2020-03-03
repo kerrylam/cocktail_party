@@ -104,7 +104,9 @@ def show_cocktail_details(cocktail_id):
 
     list of ingredients, measurements, and instructions.
     """
-
+    
+    user_id = session['user_id']
+    events = Event.query.filter_by(user_id=user_id).all()
     url = 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php'
     response = requests.get(url, params= {'i': cocktail_id})
     data = response.json()
@@ -131,11 +133,6 @@ def show_cocktail_details(cocktail_id):
                 ingredient_dict['img_url'] = img_url + ingredient + "-small.png"
                 ingredients.append(ingredient_dict)
             x += 1
-
-    if session['user_id']:
-        user_id = session['user_id']
-        events = Event.query.filter_by(user_id=user_id).all()
-
 
     return render_template('cocktail-details.html',
                            name=name,
