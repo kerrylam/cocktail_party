@@ -21,7 +21,6 @@ def homepage():
         data = response.json()
         cocktail = data['drinks']
         results.append(cocktail)
-
     return render_template('homepage.html',
                            results=results)
 
@@ -133,7 +132,6 @@ def show_cocktail_details(cocktail_id):
                 ingredient_dict['img_url'] = img_url + ingredient + "-small.png"
                 ingredients.append(ingredient_dict)
             x += 1
-
     return render_template('cocktail-details.html',
                            name=name,
                            url=url,
@@ -151,7 +149,6 @@ def show_cocktails_by_ingredient(ingredient_name):
     response = requests.get(url, params= {'i': ingredient_name})
     data = response.json()
     results = data['drinks']
-
     return render_template('cocktails-by-ingredient.html',
                            results=results)
 
@@ -160,12 +157,10 @@ def find_cocktails():
     """Search for cocktails on The Cocktail DB."""
 
     keyword = request.args.get('keyword', '')
-
     url = 'https://www.thecocktaildb.com/api/json/v1/1/search.php'
     response = requests.get(url, params= {'s': keyword})
     data = response.json()
     cocktails = data['drinks']
-
     return render_template('cocktail-search-results.html',
                             results=cocktails)
 
@@ -182,6 +177,7 @@ def show_user_profile():
     url = 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php'
     event_cocktails = Event_Cocktail.query.filter_by(event_id=favorites.event_id).all()
     cocktail_id_list = []
+    
     for event_cocktail in event_cocktails:
         cocktail_id_list.append(event_cocktail.cocktail_id)
         results = []
@@ -190,8 +186,6 @@ def show_user_profile():
             data = response.json()
             cocktail = data['drinks']
             results.append(cocktail)
-
-
     return render_template('my-profile.html',
                             user=user,
                             events=events,
@@ -207,7 +201,6 @@ def get_event_cocktails_json():
     cocktail_ids = []
     for cocktail in cocktails:
         cocktail_ids.append(cocktail.cocktail_id)
-
     return jsonify({"cocktails": cocktail_ids})
 
 
@@ -221,7 +214,6 @@ def create_new_event():
     new_event = Event(name=event_name, user_id=user.user_id)
     db.session.add(new_event)
     db.session.commit()
-
     return redirect('/my_profile')
 
 
@@ -239,6 +231,7 @@ def handle_event_form():
         db.session.commit()
     return redirect('/my_profile')
 
+
 @app.route('/popular_liquor_types')
 def display_popular_liquor_types():
     """Display poplular liquor types used as ingredients."""
@@ -253,7 +246,6 @@ def display_popular_liquor_types():
         data = response.json()
         cocktail = data['ingredients']
         results.append(cocktail)
-
     return render_template('liquor-types.html',
                            results=results)
 
@@ -268,7 +260,6 @@ def browse_by_letter(letter):
     data = response.json()
     cocktail = data['drinks']
     results.append(cocktail)
-
     return render_template('browse-by-letter.html',
                            results=results)
 
