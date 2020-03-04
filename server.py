@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, flash, redirect, session, jso
 from model import connect_to_db, db, User, Event, Event_Cocktail
 import api
 import requests
+import random
 
 
 app = Flask(__name__)
@@ -81,8 +82,7 @@ def handle_login():
     if login_user:
         if login_user.password == password:
             session['user_id'] = login_user.user_id
-            flash(f'Hi {login_user.fname}!')
-            return redirect("/")
+            return redirect("/my_profile")
         else:
             flash('Incorrect password')
             return redirect('/login')
@@ -271,6 +271,39 @@ def browse_by_letter(letter):
 
     return render_template('browse-by-letter.html',
                            results=results)
+
+
+@app.route('/recommended_cocktails')
+def recommended_cocktails():
+    """Display recommended cocktails based on User's favorites"""
+
+    user_id = session['user_id']
+    url = 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php'
+    ingredient_url = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php'
+    favorites = Event.query.filter_by(user_id=user_id, name="Favorites").first()
+    event_cocktails = Event_Cocktail.query.filter_by(event_id=favorites.event_id).all()
+    cocktail_id_list = []
+    ingredients = []
+    recommended_cocktails = []
+    for event_cocktail in event_cocktails:
+        cocktail_id_list.append(event_cocktail.cocktail_id)
+    for cocktail_id in cocktail_id_list:
+        response = requests.get(url, params= {'i': cocktail_id})
+        data = response.json()
+        result = data['drinks']
+        for cocktail in result:
+            ingredient = cocktail['strIngredient1']
+            ingredients.append(ingredient)
+    ingredients_set = set(ingredients)
+    for fave_ingredient in ingredients_set:
+        response = requests.get(ingredient_url, params= {'i': fave_ingredient})
+        data = response.json()
+        cocktails = data['drinks']
+        recommended_cocktails.append(cocktails)
+    recommended_cocktails_list = recommended_cocktails[0]
+    random_cocktails = random.sample(recommended_cocktails_list, 10)
+    return render_template('recommended-cocktails.html',
+                           results=random_cocktails)
 
 
 if __name__ == '__main__':
