@@ -1,4 +1,4 @@
-div.cocktail-container {
+/*figure {
     border-radius: 3px;
     border: 3px solid black;
     width: 20em;
@@ -6,3 +6,29 @@ div.cocktail-container {
     margin: 2em;
     padding: 1em;
 }
+
+figure img {
+    vertical-align: top;
+}
+
+body {
+    background: url(../images/cocktail_lounge.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+div#login-logout {
+    
+}
+
+.cocktail-party {
+    text-align: center;
+    background: url(../images/cocktail_bar.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}*/
+

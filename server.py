@@ -177,7 +177,7 @@ def show_user_profile():
     url = 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php'
     event_cocktails = Event_Cocktail.query.filter_by(event_id=favorites.event_id).all()
     cocktail_id_list = []
-    
+    results = []
     for event_cocktail in event_cocktails:
         cocktail_id_list.append(event_cocktail.cocktail_id)
         results = []
@@ -292,7 +292,10 @@ def recommended_cocktails():
         cocktails = data['drinks']
         recommended_cocktails.append(cocktails)
     recommended_cocktails_list = recommended_cocktails[0]
-    random_cocktails = random.sample(recommended_cocktails_list, 10)
+    if len(recommended_cocktails_list) < 10:
+        random_cocktails = recommended_cocktails_list
+    else:
+        random_cocktails = random.sample(recommended_cocktails_list, 10)
     return render_template('recommended-cocktails.html',
                            results=random_cocktails)
 

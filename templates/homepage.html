@@ -4,30 +4,32 @@
 
 
 {% block body %}
-<div class="container">
-    <h2>Search for a Cocktail</h2>
 
-    <form method="GET" action="/cocktail/search">
-        <label for="search-keyword">Search Keyword</label>
-        <input type="text" name="keyword">
-        <input type="submit" value="Search">
-    </form>
-</div>
-
-<div class="cocktail">
-    <h1>Top Ten Cocktails</h1>
-    {% for cocktails in results %}
-        {% for cocktail in cocktails %}
-            {% if session %}
-                <a href="/cocktail/{{ cocktail['idDrink'] }}">
-            {% else %}
-                <a href="/login">
-            {% endif %}
-                <img src="{{ cocktail['strDrinkThumb'] }}">
-                {{ cocktail['strDrink'] }}
-            </a>
-        {% endfor %}
-    {% endfor %}
-</div>
+    <div class="container-fluid padding">
+        <div class="row top-cocktails">
+            <div class="col-12">
+                <h1 class="display-4">Top Ten Cocktails</h1>
+            </div>
+            <hr>
+        </div>
+        <div class="container-fluid" padding>
+        <div class="row padding">
+            <div class="col-md-4">
+                <div class="card">
+                    {% for cocktails in results %}
+                        {% for cocktail in cocktails %}
+                                {% if session %}
+                                    <a href="/cocktail/{{ cocktail['idDrink'] }}">
+                                {% else %}
+                                    <a href="/login">
+                                {% endif %}
+                                    <img class="card-imd-top" src="{{ cocktail['strDrinkThumb'] }}">
+                                    {{ cocktail['strDrink'] }}
+                                </a>
+                            {% endfor %}
+                        {% endfor %}
+            </div>
+        </div>
+    </div>
 
 {% endblock %}

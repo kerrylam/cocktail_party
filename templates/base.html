@@ -2,74 +2,103 @@
 <html>
 <head>
     <title>{% block title %}{% endblock %}</title>
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
-        {% for message in messages %}
-            {{ message }}
-        {% endfor %}
-    {% endif %}
-    {% endwith %}
-    {% if session %}
-        <a href="/logout">Logout</a>
-    {% else %}
-        <a href="/login">Login</a>
-        <a href="/register">Register</a>
-    {% endif %}
-    <script
-        src="https://code.jquery.com/jquery-3.4.1.js"
-        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-        crossorigin="anonymous"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="/static/css/site.css">
 </head>
 <body>
-    <h1>Cocktail Party</h1>
-    <nav>
-    <ul>
-        <li>
-            <a href="/"> Home </a>
-        </li>
-        <li>
-            <a href="/popular_liquor_types"> Popular Liquor Types </a>
-        </li>
-        {% if session %}
-            <li>
-                <a href="/recommended_cocktails"> Recommended Cocktails </a>
-            </li>
-            <li>
-                <a href="/my_profile"> My Profile </a>
-            </li>
-        {% endif %}
-    </ul>
+    <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarResponsive">
+                <span class="navbar-toggle-icon"></span>
+            </button>
+            <div class="navbar-toggle-icon" id="navbarResponsive">
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            {{ message }}
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item" active>
+                        <a class="nav-link" href="/"> Home </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/popular_liquor_types"> Popular Liquor Types </a>
+                    </li>
+                    {% if session %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/recommended_cocktails"> Recommended Cocktails </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/my_profile"> My Profile </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/logout"> Logout </a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/login">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/register">Register</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
     </nav>
-    <div id="alphabet" name="letter">
-        <a href="/browse/A">A</a>|
-        <a href="/browse/B">B</a>|
-        <a href="/browse/C">C</a>|
-        <a href="/browse/D">D</a>|
-        <a href="/browse/E">E</a>|
-        <a href="/browse/F">F</a>|
-        <a href="/browse/G">G</a>|
-        <a href="/browse/H">H</a>|
-        <a href="/browse/I">I</a>|
-        <a href="/browse/J">J</a>|
-        <a href="/browse/K">K</a>|
-        <a href="/browse/L">L</a>|
-        <a href="/browse/M">M</a>|
-        <a href="/browse/N">N</a>|
-        <a href="/browse/O">O</a>|
-        <a href="/browse/P">P</a>|
-        <a href="/browse/Q">Q</a>|
-        <a href="/browse/R">R</a>|
-        <a href="/browse/S">S</a>|
-        <a href="/browse/T">T</a>|
-        <a href="/browse/U">U</a>|
-        <a href="/browse/V">V</a>|
-        <a href="/browse/W">W</a>|
-        <a href="/browse/X">X</a>|
-        <a href="/browse/Y">Y</a>|
-        <a href="/browse/Z">Z</a>
+    <div class="container-fluid">
+    <div class="row jumbotron">
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-9">
+            <div id="alphabet" name="letter">
+                <a href="/browse/A">A</a>|
+                <a href="/browse/B">B</a>|
+                <a href="/browse/C">C</a>|
+                <a href="/browse/D">D</a>|
+                <a href="/browse/E">E</a>|
+                <a href="/browse/F">F</a>|
+                <a href="/browse/G">G</a>|
+                <a href="/browse/H">H</a>|
+                <a href="/browse/I">I</a>|
+                <a href="/browse/J">J</a>|
+                <a href="/browse/K">K</a>|
+                <a href="/browse/L">L</a>|
+                <a href="/browse/M">M</a>|
+                <a href="/browse/N">N</a>|
+                <a href="/browse/O">O</a>|
+                <a href="/browse/P">P</a>|
+                <a href="/browse/Q">Q</a>|
+                <a href="/browse/R">R</a>|
+                <a href="/browse/S">S</a>|
+                <a href="/browse/T">T</a>|
+                <a href="/browse/U">U</a>|
+                <a href="/browse/V">V</a>|
+                <a href="/browse/W">W</a>|
+                <a href="/browse/X">X</a>|
+                <a href="/browse/Y">Y</a>|
+                <a href="/browse/Z">Z</a>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-3">
+            <form method="GET" action="/cocktail/search">
+                <label for="search-keyword"></label>
+                <input type="text" name="keyword">
+                <input type="submit" value="Search">
+            </form>
+        </div>
     </div>
     {% block body %}
     {% endblock %}
+
+    </div>
 </body>
 </html>
