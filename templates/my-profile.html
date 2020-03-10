@@ -3,50 +3,54 @@
 {% block title %} My Profile {% endblock %}
 
 {% block body %}
-    Hi {{ user.fname }}, welcome to your profile.
+    <h1 class="display-8">Hi {{ user.fname }}, welcome to your profile.</h1>
 
-    <form action="/create_new_event" method="POST">
-        New Event Name: <input type="text" name="name">
-        <input type="submit">
+    <form class="form-inline" action="/create_new_event" method="POST">
+        <div class="form-group">
+            <input type="text" name="name" class="form-control" placeholder="Create New Event">
+            <input type="submit" class="form-control">
+        </div>
     </form>
 
-    <div>
-        <ul>
-            {% for event in events %}
-                <li>
-                    <button> 
-                        {{ event.name }} 
-                        <input type="hidden" value={{event.event_id}}>
-                    </button>
-                </li>
-                
-            {% endfor %}
-        </ul>
-    </div>
 
-    <div class="event_cocktails">
-        {% if results == [] %}
-            No saved cocktails, please try adding to your favorites.
-        {% else %}
-            {% for cocktails in results %}
-                {% for cocktail in cocktails %}
-                    <a href="/cocktail/{{ cocktail['idDrink'] }}" id="cocktail_link">
-                    <img src="{{ cocktail['strDrinkThumb'] }}" id="cocktail_img">
-                    {{ cocktail['strDrink'] }}
-                    </a>
+    <div class="card text-center">
+        <div class="card-header">
+            <ul class="nav nav-tabs card-header-tabs">
+                {% for event in events %}
+                    <li class="nav-item">
+                        <button class="nav-link active"> 
+                            {{ event.name }} 
+                            <input type="hidden" value={{event.event_id}}>
+                        </button>
+                    </li>
                 {% endfor %}
-            {% endfor %}
-        {% endif %}
+            </ul>
+        </div>
+             <div class="card-body">
+                <div class="container-fluid padding">
+                    <div class="row padding" id="event-cocktails">
+                        {% for cocktails in results %}
+                            {% for cocktail in cocktails %}
+                                <div class="col-md-3">
+                                    <div class="card">
+                                        <a href="/cocktail/{{ cocktail['idDrink'] }}" id="cocktail_link" class="card-link">
+                                        <img src="{{ cocktail['strDrinkThumb'] }}" id="cocktail_img" class="card-img-top">
+                                        <h5 class="card-title"> {{ cocktail['strDrink'] }} </h5>
+                                        </a>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
-        $("#delete").click(function() {
-            alert('delete')
-        });
-
         $("button").click(function() {
             const inputData = {event_id: $(this).find('input:hidden').val()};
-            const currentImg = $('.event_cocktails');
+            const currentImg = $('#event-cocktails');
             currentImg.empty();
             $.get('/event_cocktails.json', inputData, (res) => {
                 const cocktail_ids = `${res.cocktails}` //string datatype
@@ -57,9 +61,8 @@
                     $.get(url, apiData, (res) => {
                         const event_cocktail = res.drinks;
                         const cocktail = event_cocktail[0];
-                        currentImg.append("<a href='/cocktail/" + cocktail.idDrink + 
-                            "'>" + "<img src=" + cocktail.strDrinkThumb + ">" +
-                            cocktail.strDrink + "</a>");
+                        currentImg.append("<div class='col-md-3'><div class='card'><a href='/cocktail/" + cocktail.idDrink + "' class='card-link'>" + "<img src=" + cocktail.strDrinkThumb + " class='card-img-top'> <h5 class='card-title'>" +
+                            cocktail.strDrink + "</h5></a></div></div>");
                     });
                 };
             });

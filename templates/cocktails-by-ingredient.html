@@ -3,16 +3,22 @@
 {% block title %} Cocktails by Ingredient {% endblock %}
 
 {% block body %}
-    <div class="container">
-        {% for cocktail in results %}
-            {% if session %}
-                <a href="/cocktail/{{ cocktail['idDrink'] }}">
-            {% else %}
-                <a href="/login">
-            {% endif %}    
-                <img src="{{ cocktail['strDrinkThumb'] }}">
-                {{ cocktail['strDrink'] }}
-            </a>
-        {% endfor %}
-    </div>
+    <div class="container-fluid padding">
+        <div class="row padding">
+            {% for cocktail in results %}
+                <div class="col-md-3">
+                    <div class="card">
+                        {% if session %}
+                            <a href="/cocktail/{{ cocktail['idDrink'] }}" class="card-link">
+                        {% else %}
+                            <a href="/login" class="card-link">
+                        {% endif %}    
+                            <img src="{{ cocktail['strDrinkThumb'] }}" class="card-img-top">
+                            <h5 class="card-title"> {{ cocktail['strDrink'] }} </h5>
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>  
 {% endblock %}

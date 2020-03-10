@@ -3,10 +3,46 @@
 {% block title %} {{ name }} {% endblock %}
 
 {% block body %}
-    <div class="container">
-        <p> {{ name }} </p>
-        <img src="{{ url }}">
-        {{ instructions }}
+    <div class="container-fluid" padding>
+        <div class="row">
+            <h5> {{ name }} </h5>
+        </div>
+        <div class="row">
+            <div class="col-5">
+                <img class="img-thumbnail" src="{{ url }}">
+            </div>
+            <div class="col-7">
+                {% for ingredient in ingredients %}
+                <div class="card d-inline-block" style="max-width: 8rem;">
+                    <img class="card-img-top" src="{{ ingredient['img_url'] }}">
+                    <p class="card-text">{{ ingredient['measurement'] }} {{ ingredient['name'] }} </p>
+                </div>
+                {% endfor %}
+                <br><br>
+                <p> {{ instructions }} </p>
+                <form class="form-inline" action='/handle_event_form' method="POST">
+                    <select class="custom-select" name="events">
+                    {% for event in events %}
+                        <option value={{event.event_id}}> {{ event.name }}</option>
+                    {% endfor %}
+                    </select>
+                    <input type="hidden" name="cocktail_id" value= {{cocktail_id}}>
+                    <input type="submit" class="form-control btn btn-primary">
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+<!--         <p> {{ name }} </p>
+        <img src="{{ url }}"> -->
+<!--         {{ instructions }}
         {% for ingredient in ingredients %}
             {{ ingredient['measurement'] }}
             {{ ingredient['name'] }}
@@ -23,7 +59,7 @@
             <input type="hidden" name="cocktail_id" value= {{cocktail_id}}>
             <input type="submit">
         </form>
-    </div>
+    </div> -->
                     
 
 {% endblock %}

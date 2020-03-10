@@ -128,7 +128,10 @@ def show_cocktail_details(cocktail_id):
             else:
                 ingredient_dict = {}
                 ingredient_dict['name'] = ingredient
-                ingredient_dict['measurement'] = measurement
+                if measurement is None:
+                    ingredient_dict['measurement'] = ""
+                else:
+                    ingredient_dict['measurement'] = measurement
                 ingredient_dict['img_url'] = img_url + ingredient + "-small.png"
                 ingredients.append(ingredient_dict)
             x += 1
@@ -261,7 +264,8 @@ def browse_by_letter(letter):
     cocktail = data['drinks']
     results.append(cocktail)
     return render_template('browse-by-letter.html',
-                           results=results)
+                           results=results,
+                           letter=letter)
 
 
 @app.route('/recommended_cocktails')

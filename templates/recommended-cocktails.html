@@ -3,15 +3,27 @@
 {% block title %} Recommended Cocktails {% endblock %}
 
 {% block body %}
-
-    <div class="cocktail">
-        <h1>Recommended Cocktails</h1>
-        {% for cocktail in results %}
-            <a href="/cocktail/{{ cocktail['idDrink'] }}">
-            <img src="{{ cocktail['strDrinkThumb'] }}">
-            {{ cocktail['strDrink'] }}
-            </a>
-        {% endfor %}
+    <div class="container-fluid padding">
+        <div class="row top-cocktails">
+            <div class="col-12">
+                <h1 class="display-4">Recommended Cocktails</h1>
+            </div>
+            <hr>
+        </div>
+        <div class="container-fluid padding">
+            <div class="row padding">
+                {% for cocktail in results %}
+                    <div class="col-md-3">
+                        <div class="card">
+                            <a href="/cocktail/{{ cocktail['idDrink'] }}" class="card-link">
+                            <img src="{{ cocktail['strDrinkThumb'] }}" class="card-img-top">
+                            <h5 class="card-title"> {{ cocktail['strDrink'] }} </h5>
+                            </a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
     </div>
 
 {% endblock %}

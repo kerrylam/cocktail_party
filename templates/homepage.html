@@ -13,21 +13,23 @@
             <hr>
         </div>
         <div class="container-fluid" padding>
-        <div class="row padding">
-            <div class="col-md-4">
-                <div class="card">
-                    {% for cocktails in results %}
-                        {% for cocktail in cocktails %}
+            <div class="row padding">
+                {% for cocktails in results %}
+                    {% for cocktail in cocktails %}
+                        <div class="col-md-4">
+                            <div class="card">
                                 {% if session %}
-                                    <a href="/cocktail/{{ cocktail['idDrink'] }}">
+                                    <a href="/cocktail/{{ cocktail['idDrink'] }}" class ="card-link">
                                 {% else %}
-                                    <a href="/login">
+                                    <a href="/login" class="card-link">
                                 {% endif %}
-                                    <img class="card-imd-top" src="{{ cocktail['strDrinkThumb'] }}">
-                                    {{ cocktail['strDrink'] }}
-                                </a>
-                            {% endfor %}
-                        {% endfor %}
+                                    <img class="card-img-top" src="{{ cocktail['strDrinkThumb'] }}">
+                                    <h5 class="card-title"> {{ cocktail['strDrink'] }} </h5>
+                                    </a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endfor %}
             </div>
         </div>
     </div>
