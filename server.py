@@ -296,10 +296,10 @@ def recommended_cocktails():
         cocktails = data['drinks']
         recommended_cocktails.append(cocktails)
     recommended_cocktails_list = recommended_cocktails[0]
-    if len(recommended_cocktails_list) < 10:
+    if len(recommended_cocktails_list) < 20:
         random_cocktails = recommended_cocktails_list
     else:
-        random_cocktails = random.sample(recommended_cocktails_list, 10)
+        random_cocktails = random.sample(recommended_cocktails_list, 20)
     return render_template('recommended-cocktails.html',
                            results=random_cocktails)
 

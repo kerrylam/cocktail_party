@@ -9,6 +9,7 @@
     crossorigin="anonymous"></script>    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="/static/css/site.css">
 </head>
@@ -54,11 +55,21 @@
                     {% endif %}
                 </ul>
             </div>
+            <form class="form-inline" method="GET" action="/cocktail/search">
+                <div class="form-group">
+                <input type="text" name="keyword" class="form-control" placeholder="Keyword">
+                <button class="btn btn-primary" type="submit" value="search">Search</button>
+            </form>
+            </div>
         </div>
     </nav>
-    <div class="container-fluid">
-    <div class="row jumbotron">
-        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-9">
+
+    {% block body %}
+    {% endblock %}
+    <br><br>
+    <footer class="footer fixed-bottom">
+        <div class="container-fluid">
+            <h5 class="footer-title"> Browse by Letter </h5>
             <div id="alphabet" name="letter">
                 <a href="/browse/A">A</a>|
                 <a href="/browse/B">B</a>|
@@ -88,17 +99,6 @@
                 <a href="/browse/Z">Z</a>
             </div>
         </div>
-        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-3">
-            <form method="GET" action="/cocktail/search">
-                <label for="search-keyword"></label>
-                <input type="text" name="keyword">
-                <input type="submit" value="Search">
-            </form>
-        </div>
-    </div>
-    {% block body %}
-    {% endblock %}
-
-    </div>
+    </footer>
 </body>
 </html>

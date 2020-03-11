@@ -3,7 +3,7 @@
 {% block title %} {{ name }} {% endblock %}
 
 {% block body %}
-    <div class="container-fluid" padding>
+    <div class="container-fluid padding">
         <div class="row">
             <h5> {{ name }} </h5>
         </div>
@@ -13,7 +13,7 @@
             </div>
             <div class="col-7">
                 {% for ingredient in ingredients %}
-                <div class="card d-inline-block" style="max-width: 8rem;">
+                <div class="card d-inline-block" style="max-width: 8rem; margin-left: 20px; margin-right: 20px; margin-bottom: 15px">
                     <img class="card-img-top" src="{{ ingredient['img_url'] }}">
                     <p class="card-text">{{ ingredient['measurement'] }} {{ ingredient['name'] }} </p>
                 </div>
