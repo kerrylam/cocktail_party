@@ -42,10 +42,18 @@ body {
 
 .form-signin {
   width: 100%;
-  max-width: 330px;
+  max-width: 350px;
   padding: 15px;
   margin: 0 auto;
 }
+
+.form-register {
+  width: 100%;
+  max-width: 500px;
+  padding: 15px;
+  margin: 0 auto;
+}
+
 }
 .form-signin .form-control {
   position: relative;
@@ -69,18 +77,24 @@ body {
 }
 
 .footer {
+  padding: 10px;
   margin: 0;
   position: relative;
   text-align: center;
   bottom: 0;
   width: 100%;
-  height: auto;
+  height: 80px;
   line-height: auto;
   background-color: #f5f5f5;
 }
 
+.footer-title {
+  margin-top: 5px;
+}
+
 .card {
   border: 0;
+  margin-top: 18px;
 }
 
 .card-title {
@@ -90,4 +104,14 @@ body {
 
 .card-img-top {
   border-radius: 8px;
+}
+
+h1 {
+  text-align: left;
+  text-indent: 20px
+}
+
+.form-inline {
+  float: right;
+  margin-right: 30px;
 }

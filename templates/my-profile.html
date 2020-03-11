@@ -3,14 +3,15 @@
 {% block title %} My Profile {% endblock %}
 
 {% block body %}
-    <h1 class="display-8">Hi {{ user.fname }}, welcome to your profile.</h1>
+    <h1 class="display-8">Hi {{ user.fname }}, welcome to your profile!</h1>
 
     <form class="form-inline" action="/create_new_event" method="POST">
         <div class="form-group">
             <input type="text" name="name" class="form-control" placeholder="Create New Event">
-            <button class="btn btn-primary" type="submit">Submit</button>
+            <button class="btn btn-outline-dark" type="submit">Submit</button>
         </div>
     </form>
+    <br>
     <br>
 
     <div class="card text-center">
