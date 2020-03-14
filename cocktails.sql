@@ -16,15 +16,45 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
+ALTER TABLE ONLY public.events DROP CONSTRAINT events_user_id_fkey;
+ALTER TABLE ONLY public.event_cocktails DROP CONSTRAINT event_cocktails_event_id_fkey;
+ALTER TABLE ONLY public.users DROP CONSTRAINT users_pkey;
+ALTER TABLE ONLY public.events DROP CONSTRAINT events_pkey;
+ALTER TABLE ONLY public.event_cocktails DROP CONSTRAINT event_cocktails_pkey;
+ALTER TABLE public.users ALTER COLUMN user_id DROP DEFAULT;
+ALTER TABLE public.events ALTER COLUMN event_id DROP DEFAULT;
+ALTER TABLE public.event_cocktails ALTER COLUMN event_cocktail_id DROP DEFAULT;
+DROP SEQUENCE public.users_user_id_seq;
+DROP TABLE public.users;
+DROP SEQUENCE public.events_event_id_seq;
+DROP TABLE public.events;
+DROP SEQUENCE public.event_cocktails_event_cocktail_id_seq;
+DROP TABLE public.event_cocktails;
+DROP EXTENSION plpgsql;
+DROP SCHEMA public;
 --
--- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+-- Name: public; Type: SCHEMA; Schema: -; Owner: -
+--
+
+CREATE SCHEMA public;
+
+
+--
+-- Name: SCHEMA public; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON SCHEMA public IS 'standard public schema';
+
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: -
 --
 
 CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 
 
 --
--- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: -
 --
 
 COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
@@ -35,7 +65,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: event_cocktails; Type: TABLE; Schema: public; Owner: vagrant
+-- Name: event_cocktails; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.event_cocktails (
@@ -45,10 +75,8 @@ CREATE TABLE public.event_cocktails (
 );
 
 
-ALTER TABLE public.event_cocktails OWNER TO vagrant;
-
 --
--- Name: event_cocktails_event_cocktail_id_seq; Type: SEQUENCE; Schema: public; Owner: vagrant
+-- Name: event_cocktails_event_cocktail_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE public.event_cocktails_event_cocktail_id_seq
@@ -60,17 +88,15 @@ CREATE SEQUENCE public.event_cocktails_event_cocktail_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.event_cocktails_event_cocktail_id_seq OWNER TO vagrant;
-
 --
--- Name: event_cocktails_event_cocktail_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: vagrant
+-- Name: event_cocktails_event_cocktail_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE public.event_cocktails_event_cocktail_id_seq OWNED BY public.event_cocktails.event_cocktail_id;
 
 
 --
--- Name: events; Type: TABLE; Schema: public; Owner: vagrant
+-- Name: events; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.events (
@@ -80,10 +106,8 @@ CREATE TABLE public.events (
 );
 
 
-ALTER TABLE public.events OWNER TO vagrant;
-
 --
--- Name: events_event_id_seq; Type: SEQUENCE; Schema: public; Owner: vagrant
+-- Name: events_event_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE public.events_event_id_seq
@@ -95,17 +119,15 @@ CREATE SEQUENCE public.events_event_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.events_event_id_seq OWNER TO vagrant;
-
 --
--- Name: events_event_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: vagrant
+-- Name: events_event_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE public.events_event_id_seq OWNED BY public.events.event_id;
 
 
 --
--- Name: users; Type: TABLE; Schema: public; Owner: vagrant
+-- Name: users; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.users (
@@ -118,10 +140,8 @@ CREATE TABLE public.users (
 );
 
 
-ALTER TABLE public.users OWNER TO vagrant;
-
 --
--- Name: users_user_id_seq; Type: SEQUENCE; Schema: public; Owner: vagrant
+-- Name: users_user_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE public.users_user_id_seq
@@ -133,101 +153,105 @@ CREATE SEQUENCE public.users_user_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.users_user_id_seq OWNER TO vagrant;
-
 --
--- Name: users_user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: vagrant
+-- Name: users_user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE public.users_user_id_seq OWNED BY public.users.user_id;
 
 
 --
--- Name: event_cocktails event_cocktail_id; Type: DEFAULT; Schema: public; Owner: vagrant
+-- Name: event_cocktails event_cocktail_id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.event_cocktails ALTER COLUMN event_cocktail_id SET DEFAULT nextval('public.event_cocktails_event_cocktail_id_seq'::regclass);
 
 
 --
--- Name: events event_id; Type: DEFAULT; Schema: public; Owner: vagrant
+-- Name: events event_id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.events ALTER COLUMN event_id SET DEFAULT nextval('public.events_event_id_seq'::regclass);
 
 
 --
--- Name: users user_id; Type: DEFAULT; Schema: public; Owner: vagrant
+-- Name: users user_id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.users ALTER COLUMN user_id SET DEFAULT nextval('public.users_user_id_seq'::regclass);
 
 
 --
--- Data for Name: event_cocktails; Type: TABLE DATA; Schema: public; Owner: vagrant
+-- Data for Name: event_cocktails; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY public.event_cocktails (event_cocktail_id, event_id, cocktail_id) FROM stdin;
-1	1	11005
-2	2	11006
-3	1	11004
-4	4	11002
-5	3	13200
-6	1	12196
-7	5	11000
-8	6	16447
-9	5	16963
-10	1	11006
+1	1	11001
+2	4	11001
+3	3	14956
+4	2	13222
+5	2	16158
+6	2	16271
+7	3	13621
+8	3	13032
+9	3	11634
+10	4	11005
+11	4	17197
+12	1	17241
+13	1	11004
+14	1	16984
+15	1	17207
+16	4	11008
+17	1	11690
+18	1	17188
+19	1	17211
 \.
 
 
 --
--- Data for Name: events; Type: TABLE DATA; Schema: public; Owner: vagrant
+-- Data for Name: events; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY public.events (event_id, name, user_id) FROM stdin;
 1	Favorites	1
-2	Jon's 30th Birthday	1
-3	4th of July Party	1
-4	Amy's Birthday	1
-5	Favorites	2
-6	Cinco de Mayo	2
+2	4th of July	1
+3	Party Time	1
+4	Classy Dinner	1
 \.
 
 
 --
--- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: vagrant
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY public.users (user_id, fname, lname, username, email, password) FROM stdin;
 1	Kerry	Lam	kqlam21	kqlam21@gmail.com	123
-2	John	Smith	jsmith	john@gmail.com	12345
 \.
 
 
 --
--- Name: event_cocktails_event_cocktail_id_seq; Type: SEQUENCE SET; Schema: public; Owner: vagrant
+-- Name: event_cocktails_event_cocktail_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.event_cocktails_event_cocktail_id_seq', 10, true);
-
-
---
--- Name: events_event_id_seq; Type: SEQUENCE SET; Schema: public; Owner: vagrant
---
-
-SELECT pg_catalog.setval('public.events_event_id_seq', 6, true);
+SELECT pg_catalog.setval('public.event_cocktails_event_cocktail_id_seq', 19, true);
 
 
 --
--- Name: users_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: vagrant
+-- Name: events_event_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.users_user_id_seq', 2, true);
+SELECT pg_catalog.setval('public.events_event_id_seq', 4, true);
 
 
 --
--- Name: event_cocktails event_cocktails_pkey; Type: CONSTRAINT; Schema: public; Owner: vagrant
+-- Name: users_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.users_user_id_seq', 1, true);
+
+
+--
+-- Name: event_cocktails event_cocktails_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.event_cocktails
@@ -235,7 +259,7 @@ ALTER TABLE ONLY public.event_cocktails
 
 
 --
--- Name: events events_pkey; Type: CONSTRAINT; Schema: public; Owner: vagrant
+-- Name: events events_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.events
@@ -243,7 +267,7 @@ ALTER TABLE ONLY public.events
 
 
 --
--- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: vagrant
+-- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.users
@@ -251,7 +275,7 @@ ALTER TABLE ONLY public.users
 
 
 --
--- Name: event_cocktails event_cocktails_event_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: vagrant
+-- Name: event_cocktails event_cocktails_event_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.event_cocktails
@@ -259,11 +283,18 @@ ALTER TABLE ONLY public.event_cocktails
 
 
 --
--- Name: events events_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: vagrant
+-- Name: events events_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.events
     ADD CONSTRAINT events_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(user_id);
+
+
+--
+-- Name: SCHEMA public; Type: ACL; Schema: -; Owner: -
+--
+
+GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
 --
