@@ -277,31 +277,36 @@ def recommended_cocktails():
     ingredient_url = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php'
     favorites = Event.query.filter_by(user_id=user_id, name="Favorites").first()
     event_cocktails = Event_Cocktail.query.filter_by(event_id=favorites.event_id).all()
-    cocktail_id_list = []
-    ingredients = []
-    recommended_cocktails = []
-    for event_cocktail in event_cocktails:
-        cocktail_id_list.append(event_cocktail.cocktail_id)
-    for cocktail_id in cocktail_id_list:
-        response = requests.get(url, params= {'i': cocktail_id})
-        data = response.json()
-        result = data['drinks']
-        for cocktail in result:
-            ingredient = cocktail['strIngredient1']
-            ingredients.append(ingredient)
-    ingredients_set = set(ingredients)
-    for fave_ingredient in ingredients_set:
-        response = requests.get(ingredient_url, params= {'i': fave_ingredient})
-        data = response.json()
-        cocktails = data['drinks']
-        recommended_cocktails.append(cocktails)
-    recommended_cocktails_list = recommended_cocktails[0]
-    if len(recommended_cocktails_list) < 20:
-        random_cocktails = recommended_cocktails_list
+    if not event_cocktails:
+        flash('Please add at least one cocktail to your favorites to view recommended')
+        return redirect('/')
     else:
-        random_cocktails = random.sample(recommended_cocktails_list, 20)
-    return render_template('recommended-cocktails.html',
-                           results=random_cocktails)
+        cocktail_id_list = []
+        ingredients = []
+        recommended_cocktails = []
+        for event_cocktail in event_cocktails:
+            cocktail_id_list.append(event_cocktail.cocktail_id)
+        for cocktail_id in cocktail_id_list:
+            response = requests.get(url, params= {'i': cocktail_id})
+            data = response.json()
+            result = data['drinks']
+            for cocktail in result:
+                ingredient = cocktail['strIngredient1']
+                ingredients.append(ingredient)
+        ingredients_set = set(ingredients)
+        for fave_ingredient in ingredients_set:
+            response = requests.get(ingredient_url, params= {'i': fave_ingredient})
+            data = response.json()
+            cocktails = data['drinks']
+            recommended_cocktails.append(cocktails)
+        recommended_cocktails_list = recommended_cocktails[0]
+        if len(recommended_cocktails_list) < 20:
+            random_cocktails = recommended_cocktails_list
+        else:
+            random_cocktails = random.sample(recommended_cocktails_list, 20)
+        return render_template('recommended-cocktails.html',
+                               event_cocktails=event_cocktails,
+                               results=random_cocktails)
 
 
 if __name__ == '__main__':
