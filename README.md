@@ -22,7 +22,7 @@ Browse by top cocktails, cocktails by name, popular liquor types, recommended co
 <br><br>
 
 <p align="center">
-![browse](/static/videos/browse.gif)
+<img src="/static/videos/browse.gif">
 <br/><br/>
  </p>
 
@@ -30,7 +30,7 @@ Once you've found a cocktail you like, you can add it to your favorites or any e
 <br><br>
 
 <p align="center">
-![cocktail](/static/videos/cocktail.gif)
+<img src="/static/videos/cocktail.gif">
 <br/><br/>
  </p>
 
@@ -38,7 +38,7 @@ In your profile, create your own event keep track of all the cocktails you’ve 
 <br><br>
 
 <p align="center">
-![profile](/static/videos/profile.gif)
+<img src="/static/videos/profile.gif">
 <br><br>
  </p>
 
