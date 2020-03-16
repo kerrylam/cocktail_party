@@ -9,7 +9,7 @@
 * [About the Developer](#developer)
  
 ## <a name="overview"></a>Overview
-Discover the perfect cocktails for any occasion. <a href="http://www.cocktailparty.fun/">Cocktail Party </a>features 500+ recipes to view, favorite, or add to personalized lists. With Cocktail Party, you will be clicking then sipping in no time! Cheers!
+Discover the perfect cocktails for any occasion. <a href="http://www.cocktailparty.fun/" target="_blank">Cocktail Party </a>features 500+ recipes to view, favorite, or add to personalized lists. With Cocktail Party, you will be clicking then sipping in no time! Cheers!
 <br>
 
 ## <a name="tech-stack"></a>Tech Stack
@@ -106,4 +106,4 @@ Visit localhost:5000 on your browser to start clicking and sipping!
 
 Accountant-turned-developer, Kerry is a curious, collaborative problem solver always in pursuit of the most thoughtful and efficient solutions. 
 
-Learn more about Kerry on her <a href="https://www.linkedin.com/in/kerrylam/">LinkedIn.</a>
+Learn more about Kerry on her <a href="https://www.linkedin.com/in/kerrylam/" target="_blank">LinkedIn.</a>
