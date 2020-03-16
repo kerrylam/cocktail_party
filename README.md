@@ -18,11 +18,19 @@ __Back End:__ Python, Flask, PostgreSQL, SQLAlchemy
 
 ## <a name="features"></a>Features
 
-Browse by top cocktails, cocktails by name, popular liquor types, recommended cocktails based on your favorites, or if you’re looking for something more specific, there’s a keyword search bar to help you narrow it down:
+Browse by top cocktails, cocktails by name, popular liquor types, or recommended cocktails based on your favorites:
 <br><br>
 
 <p align="center">
 <img src="/static/videos/browse.gif">
+<br/><br/>
+ </p>
+
+If you’re looking for something more specific, there’s a keyword search bar to help you narrow it down:
+<br><br>
+
+<p align="center">
+<img src="/static/videos/search.gif">
 <br/><br/>
  </p>
 
