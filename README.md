@@ -42,7 +42,7 @@ Once you've found a cocktail you like, you can add it to your favorites or any e
 <br/><br/>
  </p>
 
-In your profile, create your own event keep track of all the cocktails you’ve saved so you can quickly look them up and serve them at your next event:
+In your profile, create your own event to keep track of cocktails you’ve saved so you can quickly look them up and serve them at your next event:
 <br><br>
 
 <p align="center">
