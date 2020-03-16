@@ -21,20 +21,26 @@ __Back End:__ Python, Flask, PostgreSQL, SQLAlchemy
 Browse by top cocktails, cocktails by name, popular liquor types, recommended cocktails based on your favorites, or if you’re looking for something more specific, there’s a keyword search bar to help you narrow it down:
 <br><br>
 
+<p align="center">
 ![browse](/static/videos/browse.gif)
 <br/><br/>
+ </p>
 
 Once you've found a cocktail you like, you can add it to your favorites or any event that you've created:
 <br><br>
 
+<p align="center">
 ![cocktail](/static/videos/cocktail.gif)
 <br/><br/>
+ </p>
 
 In your profile, create your own event keep track of all the cocktails you’ve saved so you can quickly look them up and serve them at your next event:
 <br><br>
 
+<p align="center">
 ![profile](/static/videos/profile.gif)
 <br><br>
+ </p>
 
 ## <a name="developer"></a>About the Developer
 
