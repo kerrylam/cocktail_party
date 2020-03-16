@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %} Browse {% endblock %}
+
+{% block body %}
+     <div class="container-fluid padding">
+        <div class="row top-cocktails">
+            <div class="col-12">
+                <h1 class="display-4">#</h1>
+            </div>
+            <hr>
+        </div>
+        <div class="container-fluid" padding>
+            <div class="row padding">
+                {% for cocktails in results %}
+                    {% for cocktail in cocktails %}
+                        <div class="col-md-3">
+                            <div class="card">
+                                {% if session %}
+                                    <a href="/cocktail/{{ cocktail['idDrink'] }}" class="card-link">
+                                {% else %}
+                                    <a href="/login" class="card-link">
+                                {% endif %}
+                                <img src="{{ cocktail['strDrinkThumb'] }}" class="card-img-top">
+                                <h5 class="card-title"> {{ cocktail['strDrink'] }} </h5></a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

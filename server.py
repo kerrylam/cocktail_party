@@ -93,7 +93,6 @@ def handle_login():
 @app.route('/logout')
 def logout():
     session.pop('user_id')
-    flash("You are logged out.")
     return redirect('/')
 
 
@@ -164,8 +163,12 @@ def find_cocktails():
     response = requests.get(url, params= {'s': keyword})
     data = response.json()
     cocktails = data['drinks']
-    return render_template('cocktail-search-results.html',
-                            results=cocktails)
+    if not cocktails:
+        flash("No results, please try again.")
+        return redirect('/')
+    else: 
+        return render_template('cocktail-search-results.html',
+                                results=cocktails)
 
 
 @app.route('/my_profile')
@@ -268,6 +271,22 @@ def browse_by_letter(letter):
                            letter=letter)
 
 
+@app.route('/browse/number')
+def browse_by_number():
+    """Display cocktails that start with a #"""
+
+    numbers = [1, 2, 3, 4, 5, 6, 7, 9, 0]
+    url = 'https://www.thecocktaildb.com/api/json/v1/1/search.php'
+    results = []
+    for number in numbers:
+        response = requests.get(url, params= {'s': number})
+        data = response.json()
+        cocktails = data['drinks']
+        results.append(cocktails)
+    return render_template('browse-by-number.html',
+                           results=results)
+
+
 @app.route('/recommended_cocktails')
 def recommended_cocktails():
     """Display recommended cocktails based on User's favorites"""
@@ -305,7 +324,6 @@ def recommended_cocktails():
         else:
             random_cocktails = random.sample(recommended_cocktails_list, 20)
         return render_template('recommended-cocktails.html',
-                               event_cocktails=event_cocktails,
                                results=random_cocktails)
 
 
