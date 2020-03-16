@@ -1,5 +1,4 @@
 ﻿# Cocktail Party
-<br>
 
 ## Table of Contents
 
