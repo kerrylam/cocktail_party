@@ -12,7 +12,7 @@ Discover the perfect cocktails for any occasion. <a href="www.cocktailparty.fun"
 <br>
 
 ## <a name="tech-stack"></a>Tech Stack
-__Front End:__ HTML5, Jinja2, JavaScript, jQuery, AJAX, Bootstrap, CSS
+__Front End:__ HTML5, Jinja2, JavaScript, jQuery, AJAX, Bootstrap, CSS<br>
 __Back End:__ Python, Flask, PostgreSQL, SQLAlchemy
 <br/>
 
