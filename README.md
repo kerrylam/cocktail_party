@@ -7,7 +7,6 @@
 * [Tech Stack](#tech-stack)
 * [Features](#features)
 * [About the Developer](#developer)
- <br>
  
 ## <a name="overview"></a>Overview
 Discover the perfect cocktails for any occasion. <a href="www.cocktailparty.fun">Cocktail Party </a>features 500+ recipes to view, favorite, or add to personalized lists. With Cocktail Party, you will be clicking then sipping in no time! Cheers!
