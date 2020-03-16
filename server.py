@@ -94,7 +94,7 @@ def handle_login():
 def logout():
     session.pop('user_id')
     flash("You are logged out.")
-    return redirect("/")
+    return redirect('/')
 
 
 @app.route('/cocktail/<cocktail_id>')

@@ -21,14 +21,13 @@
                                 {% else %}
                                     <a href="/login" class="card-link">
                                 {% endif %}
-                                    <img src="{{ cocktail['strDrinkThumb'] }}" class="card-img-top">
-                                    <h5 class="card-title"> {{ cocktail['strDrink'] }} </h5>
-                                    </a>
+                                <img src="{{ cocktail['strDrinkThumb'] }}" class="card-img-top">
+                                <h5 class="card-title"> {{ cocktail['strDrink'] }} </h5></a>
                             </div>
                         </div>
                     {% endfor %}
                 {% endfor %}
             </div>
-        </div>  
-    </div>  
+        </div>
+    </div>
 {% endblock %}
