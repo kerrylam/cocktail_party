@@ -5,6 +5,7 @@
 * [Overview](#overview)
 * [Tech Stack](#tech-stack)
 * [Features](#features)
+* [Setup/Installation](#setup)
 * [About the Developer](#developer)
  
 ## <a name="overview"></a>Overview
@@ -13,7 +14,8 @@ Discover the perfect cocktails for any occasion. <a href="www.cocktailparty.fun"
 
 ## <a name="tech-stack"></a>Tech Stack
 __Front End:__ HTML5, Jinja2, JavaScript, jQuery, AJAX, Bootstrap, CSS<br>
-__Back End:__ Python, Flask, PostgreSQL, SQLAlchemy
+__Back End:__ Python, Flask, PostgreSQL, SQLAlchemy<br>
+__APIs:__ TheCocktailDB
 <br/>
 
 ## <a name="features"></a>Features
@@ -49,6 +51,56 @@ In your profile, create your own event to keep track of cocktails you’ve saved
 <img src="/static/videos/profile.gif">
 <br><br>
  </p>
+
+## <a name="setup"></a>Setup/Installation
+
+### Prerequisites:
+
+- Python3
+- PostgreSQL
+
+### Run Cocktail Party on your local computer:
+
+Clone repository:
+```
+$ git clone https://github.com/kqlam21/cocktail_party.git
+```
+<br>
+
+Create and activate a virtual environment inside your cocktail_party directory:
+```
+$ virtualenv env
+$ source env/bin/activate
+```
+<br>
+
+Install dependencies:
+```
+$ pip3 install -r requirements.txt
+```
+<br>
+
+Create database 'cocktails':
+```
+$ createdb cocktails
+```
+<br>
+
+Run model.py in terminal to create database tables:
+```
+$ python3 model.py
+Connected to db & created tables.
+```
+<br>
+
+Run the app from the command line:
+```
+$ python3 server.py
+```
+<br>
+
+Visit localhost:5000 on your browser to start clicking and sipping!
+<br><br>
 
 ## <a name="developer"></a>About the Developer
 
