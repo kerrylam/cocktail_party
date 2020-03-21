@@ -10,6 +10,8 @@
  
 ## <a name="overview"></a>Overview
 Discover the perfect cocktails for any occasion. <a href="https://www.cocktailparty.fun/" target="_blank">Cocktail Party </a>features 500+ recipes to view, favorite, or add to personalized lists. With Cocktail Party, you will be clicking then sipping in no time! Cheers!
+
+Watch my demo here: <a href="https://vimeo.com/kqlam21/cocktailparty">Cocktail Party Demo</a>
 <br>
 
 ## <a name="tech-stack"></a>Tech Stack
